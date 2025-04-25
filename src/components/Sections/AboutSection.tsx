@@ -80,7 +80,7 @@ const AboutSection = () => {
             >
               <div className="w-[250px] h-[250px] rounded-full overflow-hidden border-4 border-primary/30 relative mx-auto">
                 <img 
-                  src="/image.png" 
+                  src="public\image.png" 
                   alt="Saathvic Sathish" 
                   className="w-full h-full object-cover"
                 />

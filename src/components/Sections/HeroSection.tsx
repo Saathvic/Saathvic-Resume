@@ -85,17 +85,35 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="max-w-3xl mx-auto"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text glow-text">Saathvic Sathish</h1>
-          <h2 className="text-xl md:text-2xl mb-3 text-white/90">
-            Aspiring Full Stack Developer | Exploring AI/ML & AR | Generative AI Developer
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text glow-text">Saathvic Sathish</h1>
+          
+          <h2 className="text-xl md:text-2xl mb-5 text-white/90">
+            Aspiring Full Stack Developer
           </h2>
-          <p className="text-lg mb-8 text-white/80">
-            Puducherry, India | saathvicsathish@gmail.com | +91 8667866489
-          </p>
-          <p className="text-lg mb-8 text-white/80">
-            Finalist @ Aventus 2.0 & 0x.day Hacksday | Top Performer @ Creators of Metaverse
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          
+          <div className="flex flex-wrap justify-center gap-x-3 mb-8">
+            <span className="text-primary/90 px-2">Exploring AI/ML & AR</span>
+            <span className="hidden sm:inline text-white/60">|</span>
+            <span className="text-primary/90 px-2">Generative AI Developer</span>
+          </div>
+
+          <div className="mb-12 flex flex-col items-center">
+            <div className="inline-flex items-center px-4 py-1.5 mb-3 bg-primary/10 rounded-full">
+              <svg className="w-4 h-4 text-primary mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 15l8.5-8.5-4-4-8.5 8.5L6 17l6-2zm6.5-11.5l2 2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span className="text-white/90">Finalist @ Aventus 2.0 & 0x.day Hacksday</span>
+            </div>
+            
+            <div className="inline-flex items-center px-4 py-1.5 bg-primary/10 rounded-full">
+              <svg className="w-4 h-4 text-primary mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2l3 7h7l-6 4 3 7-7-4-7 4 3-7-6-4h7l3-7z" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span className="text-white/90">Top Performer @ Creators of Metaverse</span>
+            </div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button className="bg-primary hover:bg-primary/80 text-white px-6 py-6 rounded-full hover:glow transition-all duration-300">
               <Download className="mr-2 h-5 w-5" /> Download Resume
             </Button>

@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Brain, HeartHandshake, Clock, PenTool, Users, CircleUser, Code, Database, Cpu, Terminal, Sparkles } from "lucide-react";
+// Import the image directly to let bundler handle the path
+import profileImage from "/image.png";
 
 // Separate technical and soft skills
 const technicalSkills = [
-  { name: "Python, Java, C", icon: Code },
-  { name: "AI/ML", icon: Brain, tag: "basic" },
   { name: "LangChain & LLaMA", icon: Cpu },
   { name: "YOLO & OpenCV", icon: Terminal },
   { name: "Generative AI", icon: Sparkles, tag: "basic" },

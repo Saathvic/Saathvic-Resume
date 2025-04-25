@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Brain, HeartHandshake, Clock, PenTool, Users, CircleUser, Code, Database, Cpu, Terminal, Sparkles } from "lucide-react";
-// Import the image directly to let bundler handle the path
-import profileImage from "/image.png";
+// Import the image from src/assets for proper bundling
+import profileImage from "../../assets/profile.png";
 
 // Separate technical and soft skills
 const technicalSkills = [
@@ -80,7 +80,7 @@ const AboutSection = () => {
             >
               <div className="w-[250px] h-[250px] rounded-full overflow-hidden border-4 border-primary/30 relative mx-auto">
                 <img 
-                  src="public\image.png" 
+                  src={profileImage} 
                   alt="Saathvic Sathish" 
                   className="w-full h-full object-cover"
                 />

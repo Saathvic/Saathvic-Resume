@@ -1,0 +1,19 @@
+
+{
+  "glyphs": {
+    "A": {"ha": 664, "x_min": 16, "x_max": 648, "o": "m 346 664 l 648 0 l 531 0 l 468 152 l 195 152 l 132 0 l 16 0 l 318 664 l 346 664 m 230 236 l 433 236 l 332 504 l 331 504 l 230 236 z "},
+    "I": {"ha": 280, "x_min": 90, "x_max": 190, "o": "m 190 0 l 90 0 l 90 664 l 190 664 l 190 0 z "},
+    "V": {"ha": 664, "x_min": 7, "x_max": 656, "o": "m 325 0 l 7 664 l 122 664 l 324 184 l 325 184 l 527 664 l 656 664 l 339 0 l 325 0 z "},
+    "R": {"ha": 606, "x_min": 80, "x_max": 593, "o": "m 190 0 l 90 0 l 90 664 l 324 664 q 418 659 473 637 q 529 615 529 659 q 580 557 580 615 q 524 460 580 499 q 591 412 545 457 q 593 322 593 412 q 564.5 222 593 264 q 422 168 536 179 l 324 168 l 190 168 l 190 0 m 190 275 l 314 275 q 394 284 432 275 q 470 338 470 299 q 428 387 470 374 q 359 396 411 392 l 190 396 l 190 275 m 190 500 l 312 500 q 369 503 401 500 q 450 550 450 512 q 411 594 450 580 q 334 600 394 600 l 190 600 l 190 500 z "}
+  },
+  "familyName": "Inter",
+  "ascender": 930,
+  "descender": -250,
+  "underlinePosition": -100,
+  "underlineThickness": 50,
+  "boundingBox": {"yMin": -250, "xMin": -450, "yMax": 930, "xMax": 1600},
+  "resolution": 1000,
+  "original_font_information": {"format": 0, "copyright": "Copyright 2020 The Inter Project Authors", "fontFamily": "Inter", "fontSubfamily": "Bold", "uniqueID": "3.15;RSMS;Inter-Bold", "fullName": "Inter Bold", "version": "3.15", "postScriptName": "Inter-Bold", "trademark": "Inter is a trademark of Rasmus Andersson.", "manufacturer": "The Inter Project Authors", "designer": "Rasmus Andersson", "manufacturerURL": "https://github.com/rsms/inter", "designerURL": "https://rsms.me/", "licence": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL", "licenceURL": "http://scripts.sil.org/OFL"},
+  "cssFontWeight": "bold",
+  "cssFontStyle": "normal"
+}

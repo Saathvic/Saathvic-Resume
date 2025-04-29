@@ -1,12 +1,13 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config = {
 	darkMode: ["class"],
 	content: [
-		"./pages/**/*.{ts,tsx}",
-		"./components/**/*.{ts,tsx}",
-		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		"./index.html",
+		"./pages/**/*.{js,ts,jsx,tsx}",
+		"./components/**/*.{js,ts,jsx,tsx}",
+		"./app/**/*.{js,ts,jsx,tsx}",
+		"./src/**/*.{js,ts,jsx,tsx}",
 	],
 	prefix: "",
 	theme: {
@@ -16,6 +17,15 @@ export default {
 			screens: {
 				'2xl': '1400px'
 			}
+		},
+		screens: {
+			'xs': '360px',
+			'sm': '640px',
+			'md': '768px',
+			'lg': '1024px',
+			'xl': '1280px',
+			'2xl': '1536px',
+			'landscape': {'raw': '(orientation: landscape)'}
 		},
 		extend: {
 			colors: {
@@ -158,5 +168,10 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		require("@tailwindcss/typography")
+	],
 } satisfies Config;
+
+export default config;

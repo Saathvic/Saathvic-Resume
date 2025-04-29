@@ -1,0 +1,143 @@
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+  activeSection?: string;
+}
+
+const menuItems = [
+  { name: "Home", href: "#hero", id: "hero" },
+  { name: "About", href: "#about", id: "about" },
+  { name: "Projects", href: "#projects", id: "projects" },
+  { name: "Experience", href: "#experience", id: "experience" },
+  { name: "Contact", href: "#contact", id: "contact" },
+];
+
+const MobileMenu = ({ isOpen, onClose, activeSection = 'hero' }: MobileMenuProps) => {
+  // Close menu when clicking a link
+  const handleLinkClick = (e: React.MouseEvent) => {
+    // Add a small delay to allow the hash navigation to work
+    setTimeout(() => {
+      onClose();
+    }, 100);
+  };
+
+  // Close menu when pressing escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    
+    // Function to set the viewport height
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = "hidden";
+      // Force the top position to 0 to ensure full screen coverage
+      window.scrollTo(0, 0);
+      // Add a class to the html for extra control
+      document.documentElement.classList.add('mobile-menu-open');
+      // Set viewport height
+      setViewportHeight();
+      // Add resize listener to update height on orientation change
+      window.addEventListener('resize', setViewportHeight);
+    }
+    
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      // Remove resize listener
+      window.removeEventListener('resize', setViewportHeight);
+      // Restore body scroll when menu is closed
+      document.body.style.overflow = "auto";
+      // Remove the class when menu closes
+      document.documentElement.classList.remove('mobile-menu-open');
+    };
+  }, [isOpen, onClose]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Full screen menu */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="fixed inset-0 w-screen h-screen bg-[#0f0f14]/95 backdrop-blur-md shadow-2xl z-50"
+            style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+          >
+            <div className="flex flex-col h-full w-full">
+              {/* Header */}
+              <div className="flex justify-between items-center p-6 md:p-8 border-b border-white/20 bg-black/40 w-full">
+                <h2 className="text-3xl font-bold">Menu</h2>
+                <button 
+                  onClick={onClose}
+                  className="p-3 rounded-full hover:bg-white/20 transition-colors"
+                  style={{ touchAction: 'manipulation' }}
+                >
+                  <X className="h-8 w-8" />
+                </button>
+              </div>
+              
+              {/* Navigation links */}
+              <nav className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-gradient-to-b from-[#0f0f14] to-[#161621] w-full">
+                <ul className="space-y-4 sm:space-y-5 max-w-md mx-auto py-6 flex flex-col justify-evenly">
+                  {menuItems.map((item, index) => {
+                    const isActive = activeSection === item.id;
+                    
+                    return (
+                      <motion.li
+                        key={item.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <a
+                          href={item.href}
+                          className={`block py-6 px-8 text-2xl text-center font-medium rounded-lg transition-colors border ${
+                            isActive
+                              ? 'bg-primary/30 border-primary/50 text-white shadow-lg'
+                              : 'bg-black/20 hover:bg-black/30 border-transparent hover:border-white/20 text-white/95'
+                          }`}
+                          onClick={handleLinkClick}
+                        >
+                          {item.name}
+                        </a>
+                      </motion.li>
+                    );
+                  })}
+                </ul>
+              </nav>
+              
+              {/* Footer */}
+              <div className="p-4 sm:p-6 md:p-8 border-t border-white/20 bg-black/40">
+                <div className="max-w-md mx-auto">
+                  <a 
+                    href="#contact"
+                    onClick={handleLinkClick}
+                    className="block py-4 sm:py-5 md:py-6 text-center bg-primary hover:bg-primary/80 rounded-lg text-white text-xl sm:text-2xl font-medium transition-colors shadow-lg"
+                  >
+                    Contact Me
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default MobileMenu;

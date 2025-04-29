@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Mail, Linkedin, Github } from "lucide-react";
+import { Mail, Linkedin, Github, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const ContactCard = ({ title, icon, value, link }: { 
   title: string, 
-  icon: "email" | "linkedin" | "github", 
+  icon: "email" | "linkedin" | "github" | "phone", 
   value: string, 
   link: string 
 }) => {
@@ -18,15 +18,16 @@ const ContactCard = ({ title, icon, value, link }: {
       rel="noopener noreferrer"
       className="glass p-4 rounded-lg text-center hover-3d group"
     >
-      <div className="h-14 w-14 mx-auto mb-2 flex items-center justify-center text-primary">
-        {icon === "email" && <Mail size={28} />}
-        {icon === "linkedin" && <Linkedin size={28} />}
-        {icon === "github" && <Github size={28} />}
+      <div className="h-12 w-12 sm:h-14 sm:w-14 mx-auto mb-2 flex items-center justify-center text-primary">
+        {icon === "email" && <Mail size={24} />}
+        {icon === "linkedin" && <Linkedin size={24} />}
+        {icon === "github" && <Github size={24} />}
+        {icon === "phone" && <Phone size={24} />}
       </div>
       
-      <div className="mt-3">
+      <div className="mt-2">
         <h3 className="text-base font-semibold mb-1">{title}</h3>
-        <p className="text-white/70 group-hover:text-primary transition-colors text-sm break-words overflow-hidden">{value}</p>
+        <p className="text-white/70 group-hover:text-primary transition-colors text-xs sm:text-sm break-words overflow-hidden">{value}</p>
       </div>
     </a>
   );
@@ -132,17 +133,17 @@ const ContactSection = () => {
   const sectionRef = useRef(null);
   
   return (
-    <section id="contact" className="min-h-screen py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-t from-background/90 to-background flex items-center">
+    <section id="contact" className="min-h-screen py-16 sm:py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-t from-background/90 to-background flex items-center">
       <div className="container mx-auto max-w-7xl">
         <div
           ref={sectionRef}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Contact</h2>
-          <h3 className="text-4xl md:text-5xl font-bold gradient-text">Get In Touch</h3>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Get In Touch</h3>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 landscape:grid-cols-2 md:grid-cols-2 gap-8 items-start">
           <div className="space-y-6">
             <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
             
@@ -152,12 +153,18 @@ const ContactSection = () => {
               connect and build something impactful.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 landscape:grid-cols-2 lg:grid-cols-4 gap-4">
               <ContactCard 
                 title="Email" 
                 icon="email" 
                 value="saathvicsathish@gmail.com" 
                 link="mailto:saathvicsathish@gmail.com" 
+              />
+              <ContactCard 
+                title="Phone" 
+                icon="phone" 
+                value="8667866489" 
+                link="tel:+918667866489" 
               />
               <ContactCard 
                 title="LinkedIn" 

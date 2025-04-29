@@ -1,12 +1,27 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Download } from "lucide-react";
+import { useRef, useEffect } from "react";
+import { useMedia } from "@/hooks/use-media";
 
-const HeroSection = () => {
+// Define the component with explicit React FC type
+function HeroSection(): JSX.Element {
+  const isDesktop = useMedia('(min-width: 768px)', false);
+
+  const animationProps = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: {
+      duration: 0.8,
+      ease: [0.21, 0.45, 0.15, 1.00]
+    }
+  };
+
   return (
-    <section id="hero" className="section relative overflow-hidden flex items-center justify-center">
+    <section id="hero" className="section relative overflow-hidden flex items-center justify-center min-h-[100svh]">
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-background via-background/90 to-primary/10">
         <div className="absolute inset-0">
+          {/* Main central glowing orb */}
           <motion.div 
             className="absolute rounded-full bg-primary/30 blur-3xl"
             style={{
@@ -27,6 +42,7 @@ const HeroSection = () => {
             }}
           />
           
+          {/* Multiple floating particles with 3D movement - Using your reference style */}
           {Array.from({ length: 20 }).map((_, i) => (
             <motion.div 
               key={i}
@@ -52,6 +68,7 @@ const HeroSection = () => {
             />
           ))}
           
+          {/* Animated horizontal lines - Using your reference style */}
           {Array.from({ length: 10 }).map((_, i) => (
             <motion.div
               key={`line-${i}`}
@@ -80,17 +97,17 @@ const HeroSection = () => {
       
       <div className="container mx-auto px-4 z-10 text-center">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={animationProps.initial}
+          animate={animationProps.animate}
+          transition={animationProps.transition}
           className="max-w-3xl mx-auto"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text glow-text">Saathvic Sathish</h1>
-          
-          <h2 className="text-xl md:text-2xl mb-5 text-white/90">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 gradient-text">Saathvic Sathish</h1>
+
+          <h2 className="text-lg sm:text-xl md:text-2xl mb-3 sm:mb-5 text-white/90">
             Aspiring Full Stack Developer
           </h2>
-          
+
           <div className="flex flex-wrap justify-center gap-x-3 mb-8">
             <span className="text-primary/90 px-2">Exploring AI/ML & AR</span>
             <span className="hidden sm:inline text-white/60">|</span>
@@ -104,7 +121,7 @@ const HeroSection = () => {
               </svg>
               <span className="text-white/90">Finalist @ Aventus 2.0 & 0x.day Hacksday</span>
             </div>
-            
+
             <div className="inline-flex items-center px-4 py-1.5 bg-primary/10 rounded-full">
               <svg className="w-4 h-4 text-primary mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M12 2l3 7h7l-6 4 3 7-7-4-7 4 3-7-6-4h7l3-7z" strokeLinecap="round" strokeLinejoin="round"/>
@@ -112,13 +129,20 @@ const HeroSection = () => {
               <span className="text-white/90">Top Performer @ Creators of Metaverse</span>
             </div>
           </div>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button className="bg-primary hover:bg-primary/80 text-white px-6 py-6 rounded-full hover:glow transition-all duration-300">
-              <Download className="mr-2 h-5 w-5" /> Download Resume
-            </Button>
-            <Button 
-              variant="outline" 
+            <a 
+              href="/Saathvic_S_resume.pdf" 
+              download="Saathvic_Sathish_Resume.pdf" 
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-primary hover:bg-primary/80 text-white px-6 py-6 rounded-full hover:glow transition-all duration-300">
+                <Download className="mr-2 h-5 w-5" /> Download Resume
+              </Button>
+            </a>
+            <Button
+              variant="outline"
               className="border-primary/30 hover:bg-primary/10 text-white rounded-full group transition-all duration-300"
             >
               <a href="#contact" className="flex items-center">
@@ -129,8 +153,8 @@ const HeroSection = () => {
           </div>
         </motion.div>
       </div>
-      
-      <motion.div 
+
+      <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         animate={{
           y: [0, 10, 0],
@@ -142,7 +166,7 @@ const HeroSection = () => {
         }}
       >
         <div className="w-8 h-14 rounded-full border-2 border-primary/50 flex justify-center">
-          <motion.div 
+          <motion.div
             className="w-1.5 h-3 bg-primary rounded-full mt-2"
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
@@ -151,6 +175,6 @@ const HeroSection = () => {
       </motion.div>
     </section>
   );
-};
+}
 
 export default HeroSection;

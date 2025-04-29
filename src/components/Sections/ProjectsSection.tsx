@@ -97,12 +97,11 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={() => !isDesktop && setIsExpanded(!isExpanded)}
-    >
-      <div className="h-40 sm:h-44 md:h-48 overflow-hidden relative">
+    >      <div className="h-36 sm:h-44 md:h-48 overflow-hidden relative">
         <img 
           src={project.image} 
           alt={project.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-50"></div>
@@ -127,9 +126,8 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
         >
           Featured
         </div>
-        
-        <motion.h3 
-          className="text-lg sm:text-xl font-bold mb-2 gradient-text line-clamp-1"
+          <motion.h3 
+          className="text-lg sm:text-xl font-bold mb-2 text-white line-clamp-1"
           style={{ transform: isDesktop ? `translateZ(30px)` : 'none' }}
         >
           {project.title}
@@ -151,27 +149,24 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
               {isExpanded ? 'Show less' : 'Read more'}
             </button>
           )}
-        </motion.div>
-        
-        <motion.div 
+        </motion.div>          <motion.div 
           className="flex flex-wrap gap-1 sm:gap-2 mb-4 max-w-full overflow-hidden"
           style={{ transform: isDesktop ? `translateZ(25px)` : 'none' }}
-        >
-          {(isExpanded ? project.technologies : project.technologies.slice(0, 4)).map((tech) => (
+        >          {(isExpanded ? project.technologies : project.technologies.slice(0, 3)).map((tech) => (
             <Badge 
               key={tech} 
               variant="outline" 
-              className="bg-primary/10 border-primary/30 text-primary glow text-xs sm:text-sm whitespace-nowrap"
+              className="bg-primary/10 border-primary/30 text-primary text-[0.65rem] sm:text-xs py-0 h-5 sm:h-6 whitespace-nowrap"
             >
               {tech}
             </Badge>
           ))}
-          {!isExpanded && project.technologies.length > 4 && (
+          {!isExpanded && project.technologies.length > 3 && (
             <Badge
               variant="outline"
-              className="bg-primary/10 border-primary/30 text-primary glow text-xs sm:text-sm whitespace-nowrap"
+              className="bg-primary/10 border-primary/30 text-primary text-[0.65rem] sm:text-xs py-0 h-5 sm:h-6 whitespace-nowrap"
             >
-              +{project.technologies.length - 4}
+              +{project.technologies.length - 3}
             </Badge>
           )}
         </motion.div>
@@ -226,12 +221,10 @@ const ProjectsSection = () => {
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
-        >
-          <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Projects</h2>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text glow-text">Featured Work</h3>
+        >          <h2 className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">Projects</h2>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Featured Work</h3>
         </motion.div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 landscape:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}

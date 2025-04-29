@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Developer Portfolio | Generative AI & AR/VR Developer</title>
     <meta name="description" content="Professional portfolio showcasing expertise in Generative AI, AR/VR, and more. View projects and get in touch." />
     <meta name="author" content="Developer Name" />
@@ -15,6 +15,49 @@
     <script>
       document.documentElement.classList.add('dark');
     </script>
+    
+    <!-- Additional styles for mobile responsiveness -->
+    <style>
+      html, body {
+        height: 100%;
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+      }
+      
+      html.mobile-menu-open,
+      html.mobile-menu-open body {
+        height: 100% !important;
+        overflow: hidden !important;
+        position: fixed;
+        width: 100%;
+        touch-action: none;
+      }
+      
+      @supports (height: 100svh) {
+        .h-screen, .h-full-screen {
+          height: 100svh;
+        }
+      }
+      
+      @media (max-height: 500px) and (orientation: landscape) {
+        .section {
+          padding-top: 5rem !important;
+          padding-bottom: 3rem !important;
+          min-height: 100vh !important;
+        }
+        .section > div {
+          margin-top: 3rem;
+        }
+      }
+      
+      /* Fix for small mobile devices */
+      @media (max-width: 380px) {
+        html {
+          font-size: 14px;
+        }
+      }
+    </style>
 
     <meta property="og:title" content="Developer Portfolio | Generative AI & AR/VR Developer" />
     <meta property="og:description" content="Professional portfolio showcasing expertise in Generative AI, AR/VR, and more. View projects and get in touch." />

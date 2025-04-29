@@ -1,19 +1,12 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Download } from "lucide-react";
-import ScrollProgress from "@/components/ScrollProgress";
-import AboutSection from "@/components/Sections/AboutSection";
-import ProjectsSection from "@/components/Sections/ProjectsSection";
-import ExperienceSection from "@/components/Sections/ExperienceSection";
-import ContactSection from "@/components/Sections/ContactSection";
-import { useSectionTransitions } from "@/hooks/use-section-transitions";
+import { useRef, useEffect } from "react";
 import { useMedia } from "@/hooks/use-media";
 
-// Inline HeroSection component to fix import issues
-const HeroSection = () => {
+export default function HeroSection() {
   const isDesktop = useMedia('(min-width: 768px)', false);
-  
+
   const animationProps = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -48,7 +41,7 @@ const HeroSection = () => {
             }}
           />
           
-          {/* Multiple floating particles with 3D movement */}
+          {/* Multiple floating particles with 3D movement - Using your reference style */}
           {Array.from({ length: 20 }).map((_, i) => (
             <motion.div 
               key={i}
@@ -74,7 +67,7 @@ const HeroSection = () => {
             />
           ))}
           
-          {/* Animated horizontal lines */}
+          {/* Animated horizontal lines - Using your reference style */}
           {Array.from({ length: 10 }).map((_, i) => (
             <motion.div
               key={`line-${i}`}
@@ -181,156 +174,4 @@ const HeroSection = () => {
       </motion.div>
     </section>
   );
-};
-
-// Inline header component to fix import issues
-const Header = ({ activeSection = 'hero' }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  
-  // Mobile menu component
-  const MobileMenu = () => {
-    if (!mobileMenuOpen) return null;
-    
-    const menuItems = [
-      { name: "Home", href: "#hero", id: "hero" },
-      { name: "About", href: "#about", id: "about" },
-      { name: "Projects", href: "#projects", id: "projects" },
-      { name: "Experience", href: "#experience", id: "experience" },
-      { name: "Contact", href: "#contact", id: "contact" },
-    ];
-    
-    useEffect(() => {
-      if (mobileMenuOpen) {
-        document.body.style.overflow = "hidden";
-        document.documentElement.classList.add('mobile-menu-open');
-      }
-      return () => {
-        document.body.style.overflow = "auto";
-        document.documentElement.classList.remove('mobile-menu-open');
-      };
-    }, []);
-    
-    return (
-      <div className="fixed inset-0 w-full h-screen bg-[#0f0f14]/95 backdrop-blur-md z-50">
-        <div className="flex flex-col h-full">
-          <div className="flex justify-between items-center p-6 border-b border-white/20 bg-black/40">
-            <h2 className="text-2xl font-bold">Menu</h2>
-            <button onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-          </div>
-          
-          <nav className="flex-1 overflow-y-auto p-4 bg-gradient-to-b from-black to-[#161621]">
-            <ul className="space-y-5 max-w-md mx-auto py-6">
-              {menuItems.map((item) => (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className={`block py-5 px-6 text-xl text-center font-medium rounded-lg ${
-                      activeSection === item.id ? 'bg-primary/30 text-white' : 'text-white/90'
-                    }`}
-                    onClick={() => setTimeout(() => setMobileMenuOpen(false), 100)}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <header className={`fixed top-0 left-0 right-0 z-40 transition-all ${
-      scrolled ? "bg-black/90 backdrop-blur-md py-3 shadow-lg" : "bg-gradient-to-b from-black/90 to-black/40 py-6"
-    }`}>
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <a href="#hero" className="text-2xl font-bold gradient-text glow-text">
-          Saathvic Sathish
-        </a>
-        <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            {["About", "Projects", "Experience", "Contact"].map((item) => {
-              const sectionId = item.toLowerCase();
-              const isActive = activeSection === sectionId;
-              return (
-                <li key={item}>
-                  <a
-                    href={`#${sectionId}`}
-                    className={`relative transition-colors ${
-                      isActive 
-                        ? "text-white after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary" 
-                        : "text-white/70 hover:text-white after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:transition-all"
-                    }`}
-                  >
-                    {item}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-        
-        <button 
-          className="md:hidden text-white p-3 rounded-full bg-primary hover:bg-primary/80 shadow-lg transition-colors fixed bottom-6 right-6 z-[60] w-16 h-16 flex items-center justify-center"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-8 h-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-      </div>
-      
-      {mobileMenuOpen && <MobileMenu />}
-    </header>
-  );
-};
-
-const Index = () => {
-  const { activeSectionId } = useSectionTransitions();
-
-  return (
-    <div className="min-h-screen overflow-x-hidden">
-      <ScrollProgress />
-      <Header activeSection={activeSectionId} />
-      
-      <main className="relative">
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <ExperienceSection />
-        <ContactSection />
-      </main>
-      
-      <footer className="bg-background/90 py-6 text-center text-white/60">
-        <div className="container mx-auto">
-          <p>© {new Date().getFullYear()} Saathvic Sathish. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default Index;
+}
